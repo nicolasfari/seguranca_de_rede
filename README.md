@@ -116,9 +116,9 @@ Monitorar o perímetro significa usar firewalls, IDS/IPS e controle de acesso pa
 
 ```
 
-**O que está acontecendo:** O mesmo IP externo (`203.0.113.10`) tenta se conectar rapidamente a várias portas diferentes na mesma máquina interna.
-**Análise:** Ataque clássico de port scanning. O atacante está mapeando quais serviços estão abertos para identificar um vetor de entrada.
-**Indicador-chave:** mesmo IP de origem → múltiplos destinos em sequência rápida.
+- **O que está acontecendo:** O mesmo IP externo (`203.0.113.10`) tenta se conectar rapidamente a várias portas diferentes na mesma máquina interna.
+- **Análise:** Ataque clássico de port scanning. O atacante está mapeando quais serviços estão abertos para identificar um vetor de entrada.
+- **Indicador-chave:** mesmo IP de origem → múltiplos destinos em sequência rápida.
 
 ---
 
@@ -129,9 +129,9 @@ Monitorar o perímetro significa usar firewalls, IDS/IPS e controle de acesso pa
 2025-09-22T09:15:42Z src_ip=[REDACTED] action=BLOCK request="GET /../../../../etc/passwd" attack_type="Directory Traversal"
 ```
 
-**O que está acontecendo:** O WAF está bloqueando tentativas de XSS e Directory Traversal contra a aplicação web.
-**Análise:** Atacante testando diferentes vetores contra o mesmo alvo. Cada `action=BLOCK` com um `attack_type` é um alerta de alta confiabilidade — o WAF não só bloqueou como explicou o motivo.
-**Indicador-chave:** múltiplos `action=BLOCK` de mesmo IP com `attack_type` variados = reconhecimento ativo de vulnerabilidades.
+- **O que está acontecendo:** O WAF está bloqueando tentativas de XSS e Directory Traversal contra a aplicação web.
+- **Análise:** Atacante testando diferentes vetores contra o mesmo alvo. Cada `action=BLOCK` com um `attack_type` é um alerta de alta confiabilidade — o WAF não só bloqueou como explicou o motivo.
+- **Indicador-chave:** múltiplos `action=BLOCK` de mesmo IP com `attack_type` variados = reconhecimento ativo de vulnerabilidades.
 
 ### Cenário 3 — Força bruta em VPN
 ```
@@ -144,9 +144,9 @@ Monitorar o perímetro significa usar firewalls, IDS/IPS e controle de acesso pa
 
 ```
   
-**O que está acontecendo:** Volume alto de `FAILED_AUTH` de um IP suspeito tentando usernames comuns (`admin`, `guest`, `user`). O `SUCCESS_AUTH` isolado é tráfego legítimo de funcionário.
-**Análise:** Ataque de força bruta contra o gateway VPN usando uma lista de credenciais comuns.
-**Indicador-chave:** mesmo IP → mesmo destino → alto volume de falhas em curto espaço de tempo
+- **O que está acontecendo:** Volume alto de `FAILED_AUTH` de um IP suspeito tentando usernames comuns (`admin`, `guest`, `user`). O `SUCCESS_AUTH` isolado é tráfego legítimo de funcionário.
+- **Análise:** Ataque de força bruta contra o gateway VPN usando uma lista de credenciais comuns.
+- **Indicador-chave:** mesmo IP → mesmo destino → alto volume de falhas em curto espaço de tempo
 
 ---
 
