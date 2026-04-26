@@ -113,6 +113,7 @@ Monitorar o perímetro significa usar firewalls, IDS/IPS e controle de acesso pa
 2025-09-22 08:30:08 BLOCK TCP 203.0.113.10:50003 -> 10.0.0.20:23
 2025-09-22 08:30:09 BLOCK TCP 203.0.113.10:50004 -> 10.0.0.20:25
 2025-09-22 08:30:11 BLOCK TCP 203.0.113.10:50005 -> 10.0.0.20:53
+
 ```
 
 **O que está acontecendo:** O mesmo IP externo (`203.0.113.10`) tenta se conectar rapidamente a várias portas diferentes na mesma máquina interna.
@@ -131,20 +132,22 @@ Monitorar o perímetro significa usar firewalls, IDS/IPS e controle de acesso pa
 **O que está acontecendo:** O WAF está bloqueando tentativas de XSS e Directory Traversal contra a aplicação web.
 **Análise:** Atacante testando diferentes vetores contra o mesmo alvo. Cada `action=BLOCK` com um `attack_type` é um alerta de alta confiabilidade — o WAF não só bloqueou como explicou o motivo.
 **Indicador-chave:** múltiplos `action=BLOCK` de mesmo IP com `attack_type` variados = reconhecimento ativo de vulnerabilidades.
----
 
 ### Cenário 3 — Força bruta em VPN
 ```
+
 2025-09-22 10:12:08 FAILED_AUTH TCP [REDACTED]:31249 -> 10.0.0.1:443 (user 'guest')
 2025-09-22 10:12:09 FAILED_AUTH TCP [REDACTED]:31250 -> 10.0.0.1:443 (user 'user')
 2025-09-22 10:12:11 FAILED_AUTH TCP [REDACTED]:31245 -> 10.0.0.1:443 (user 'admin')
 2025-09-22 10:12:15 FAILED_AUTH TCP [REDACTED]:31248 -> 10.0.0.1:443 (user 'admin')
 2025-09-22 10:12:21 SUCCESS_AUTH TCP 198.51.100.88:41233 -> 10.0.0.1:443 (user 'b.jones')
+
 ```
   
 **O que está acontecendo:** Volume alto de `FAILED_AUTH` de um IP suspeito tentando usernames comuns (`admin`, `guest`, `user`). O `SUCCESS_AUTH` isolado é tráfego legítimo de funcionário.
 **Análise:** Ataque de força bruta contra o gateway VPN usando uma lista de credenciais comuns.
 **Indicador-chave:** mesmo IP → mesmo destino → alto volume de falhas em curto espaço de tempo
+
 ---
 
 ## 5. Padrões que todo analista SOC precisa reconhecer
